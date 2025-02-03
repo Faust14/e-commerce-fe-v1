@@ -1,0 +1,79 @@
+<div class="co-main-menu">
+  <div class="logo">
+    <mat-icon class="icon-size icon-navbar">add_shopping_cart</mat-icon>
+    <h1>E-commerce</h1>
+  </div>
+  <div
+    class="hover-bg-lighten d-flex align-items-center co-main-menu-item"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLink="/products"
+  >
+    <div class="navbar-item ">
+      <div class="co-main-menu-label">
+        Products
+      </div>
+      <mat-icon (click)="expendProduct()" [ngClass]="isProductExpended ? 'expendedItem':''">keyboard_arrow_up</mat-icon>
+    </div>
+  </div>
+
+  <div class="sub-menu" *ngIf="isProductExpended">
+    <div class="sub-menu-item" routerLink="/create-category" routerLinkActive="active">
+      <mat-icon class="icon-navbar">category</mat-icon>
+      Create Category
+    </div>
+    <div class="sub-menu-item" routerLink="/view-categories" routerLinkActive="active">
+      <mat-icon class="icon-navbar">table</mat-icon>
+      View categories
+    </div>
+    <div class="sub-menu-item" routerLink="/create-product" routerLinkActive="active">
+      <mat-icon class="icon-navbar">add</mat-icon>
+      Create product
+    </div>
+  </div>
+
+  <div
+    class="hover-bg-lighten d-flex align-items-center co-main-menu-item"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLink="/"
+    (click)="expendOrder()">
+    <div class="navbar-item ">
+      <div class="co-main-menu-label">
+        Orders
+      </div>
+      <mat-icon [ngClass]="orderExpended ? 'expendedItem':''">keyboard_arrow_up</mat-icon>
+    </div>
+  </div>
+
+  <div class="sub-menu" *ngIf="orderExpended">
+    <div class="sub-menu-item" routerLink="/create-category" routerLinkActive="active">
+      <mat-icon class="icon-navbar">shop</mat-icon>
+      Order
+    </div>
+    <div class="sub-menu-item" routerLink="/create-edit-product" routerLinkActive="active">
+      <mat-icon class="icon-navbar">edit</mat-icon>
+      Edit User
+    </div>
+  </div>
+
+  <div
+    class="hover-bg-lighten d-flex align-items-center co-main-menu-item"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    routerLink="/users">
+    <div class="navbar-item ">
+      <div class="co-main-menu-label">
+        Users
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div
+  class="bg-primary d-flex align-items-center co-navbar justify-content-between"
+  [ngClass]="isNavbarClosed ? 'menu-closed' : 'menu-open'"
+>
+</div>
+

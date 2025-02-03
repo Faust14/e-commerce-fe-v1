@@ -1,0 +1,15 @@
+.product-container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.product-card {
+  padding: 16px;
+  background-color: #f8f9fa;
+  margin: 5px;
+}
+
+.product {
+  max-width: 80%;
+}

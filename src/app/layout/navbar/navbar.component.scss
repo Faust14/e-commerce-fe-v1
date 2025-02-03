@@ -1,0 +1,126 @@
+
+/* ==========================================================================
+Main Menu
+========================================================================== */
+.co-main-menu {
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+  inset-inline-end: auto;
+  bottom: 0;
+  transition: all 0.3s ease;
+  z-index: 1090;
+  width: 260px;
+  background-color: #35353f;
+}
+
+.co-main-menu.menu-open {
+  width: 260px;
+}
+
+.co-main-menu.menu-closed {
+  width: 200px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 10px;
+}
+
+h1 {
+  padding-left: 10px;
+  color: white;
+}
+
+.icon-navbar {
+  color: white;
+}
+
+.icon-size {
+  font-size: 24px;
+}
+
+.co-main-menu-item {
+  position: relative;
+  cursor: pointer;
+  color: white;
+  opacity: 0.3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  font-size: 26px;
+  padding: 10px;
+  position: relative;
+}
+
+.hover-bg-lighten {
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: rgba(#fff, 0.5);
+  }
+}
+
+.sub-menu-item {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  cursor: pointer;
+  background-color: #35353f;
+  color: white;
+  opacity: 0.3;
+}
+.sub-menu {
+  background-color: #35353f;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+.sub-menu-item mat-icon {
+  margin-right: 8px;
+}
+
+.sub-menu-item:hover {
+  background-color: rgba(#fff, 0.5);
+}
+
+/* ==========================================================================
+Navbar
+========================================================================== */
+.co-navbar.menu-closed {
+  inset-inline-start: 200px;
+}
+
+.co-navbar.menu-open {
+  inset-inline-start: 260px;
+}
+
+.co-navbar {
+  background-color: #0d6efd;
+  height: 50px;
+  position: fixed;
+  top: 0;
+  inset-inline-end: 0;
+  bottom: auto;
+  z-index: 1400;
+  transition: all 0.3s ease;
+}
+
+.navbar-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.expendedItem {
+  transform: rotate(180deg);
+}
+
+
+
+
