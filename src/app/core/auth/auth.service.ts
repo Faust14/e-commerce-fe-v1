@@ -4,26 +4,31 @@ import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {Credentials, Register} from './auth.model';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {AuthStoreService} from './auth.store.service';
+import {User} from '../../user/model/user.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+  @Injectable({
+    providedIn: 'root'
+  })
 export class AuthService {
   private apiUrl = 'http://localhost:8081/api/auth';
   private tokenSubject = new BehaviorSubject<string | null>(null);
-  private isRefreshing = false;
   private refreshTokenSubject = new BehaviorSubject<string | null>(null);
   private jwtHelper = new JwtHelperService();
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authStoreService: AuthStoreService) {}
 
-  login(credentials: Credentials): Observable<{ jtwToken: string }> {
-    return this.http.post<{ jtwToken: string }>(`${this.apiUrl}/login`, credentials).pipe(
-      tap(response => this.tokenSubject.next(response.jtwToken))
+  login(credentials: Credentials): Observable<{ jtwToken: string, user: User }> {
+    return this.http.post<{ jtwToken: string, user: User }>(`${this.apiUrl}/login`, credentials).pipe(
+      tap(response => {
+        this.tokenSubject.next(response.jtwToken)
+        this.authStoreService.setUser(response.user)
+      })
     );
   }
 
   logout() {
     this.tokenSubject.next(null);
+    this.authStoreService.setUser(null!);
   }
 
   register(user: Register): Observable<void> {

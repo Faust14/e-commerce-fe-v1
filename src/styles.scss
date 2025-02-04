@@ -1,11 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .primary-color {
   color: #009df8;
 }
+
 .icon-size {
   font-size: 26px;
 }
@@ -13,6 +20,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .icon-navbar {
   color: white;
 }
+
 .link {
   display: flex;
   justify-content: center;
@@ -20,6 +28,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding: 10px;
   margin: auto;
 }
+
 .overflow-hidden {
-  overflow: hidden!important;
+  overflow-x: hidden !important;
+}
+
+.error-message {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  color: red;
+}
+
+.padding-bottom-1 {
+  padding-bottom: 1rem;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }

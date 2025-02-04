@@ -3,7 +3,7 @@ import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
-import {DynamicForm} from '../../shared/dynamic-form/DynamicForm';
+import {DynamicForm} from '../../shared/dynamic-form/dynamic-form';
 import {Category, CategoryFormModel} from '../model/category.model';
 import {ProductService} from '../product.service';
 

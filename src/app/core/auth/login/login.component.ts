@@ -2,7 +2,7 @@ import {Component, computed, Signal} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AuthService} from '../auth.service';
 import {Router, RouterLink} from '@angular/router';
-import {DynamicForm} from '../../../shared/dynamic-form/DynamicForm';
+import {DynamicForm} from '../../../shared/dynamic-form/dynamic-form';
 import {Credentials, CredentialsFormModel} from '../auth.model';
 import {catchError} from 'rxjs/operators';
 import {EMPTY} from 'rxjs';

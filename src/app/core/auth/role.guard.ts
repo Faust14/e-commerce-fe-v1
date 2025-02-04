@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanMatch, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import {AuthService} from './auth.service';
+import {roles} from '../../shared/enums/roles';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +12,9 @@ export class RoleGuard implements CanMatch {
 
   canMatch(): boolean | Observable<boolean> | Promise<boolean> {
     const user = this.authService.getCurrentUser();
-    console.log(user)
-    const hasAccess = user?.role === 'ADMIN';
+    const hasAccess = user?.role === roles.ADMIN;
     if (!hasAccess) {
-      this.router.navigate(['/unauthorized']);
+      this.router.navigate(['/empty']).then();
     }
     return hasAccess;
   }

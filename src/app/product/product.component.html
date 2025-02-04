@@ -1,22 +1,28 @@
-
 <div class="product">
-<app-search (searchTerm)="filterProducts($event)"></app-search>
+  <app-search (searchTerm)="filterProducts($event)"></app-search>
 
-<div class="product-container">
-  <mat-card *ngFor="let product of productList()" class="product-card">
-    <mat-card-header>
-      <mat-card-title>{{ product.name }}</mat-card-title>
-      <mat-card-subtitle>Quantity: {{ product.quantity }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <p>{{ product.description }}</p>
-      <p><strong>Price:</strong> {{ product.price | currency }}</p>
-      <p>{{ product.categoryName }}</p>
-    </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-raised-button color="primary">Add to Cart</button>
-    </mat-card-actions>
-  </mat-card>
-  <br>
-</div>
+  <div class="product-container">
+    <mat-card *ngFor="let product of productList()" class="product-card">
+      <mat-card-header>
+        <div class="wrapper">
+          <div>
+            <mat-card-title>{{ product.name }}</mat-card-title>
+            <mat-card-subtitle>Quantity: {{ product.quantity }}</mat-card-subtitle>
+          </div>
+          <button mat-icon-button color="primary" (click)="onEditClick(product)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ product.description }}</p>
+        <p><strong>Price:</strong> {{ product.price | currency }}</p>
+        <p>{{ product.category.name }}</p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button color="primary">Add to Cart</button>
+      </mat-card-actions>
+    </mat-card>
+    <br>
+  </div>
 </div>

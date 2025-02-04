@@ -34,10 +34,10 @@ export const routes: Routes = [
           import('./product/product.component').then((m) => m.Products),
       },
       {
-        path: 'create-product',
+        path: 'create-edit-product',
         pathMatch: 'full',
         loadComponent: () =>
-          import('./product/create-product/create-product.component').then((m) => m.CreateProductComponent),
+          import('./product/create-product/create-edit-product.component').then((m) => m.CreateEditProductComponent),
       },
       {
         path: 'create-category',
@@ -57,6 +57,12 @@ export const routes: Routes = [
         canMatch: [RoleGuard],
         loadComponent: () =>
           import('./user/user.component').then((m) => m.UserComponent),
+      },
+      {
+        path: 'edit-user',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./user/edit-user/edit-user.component').then((m) => m.EditUserComponent),
       },
     ],
   },

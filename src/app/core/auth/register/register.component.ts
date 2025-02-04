@@ -2,7 +2,7 @@ import {Component, computed, Signal} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {AuthService} from '../auth.service';
-import {DynamicForm} from "../../../shared/dynamic-form/DynamicForm";
+import {DynamicForm} from "../../../shared/dynamic-form/dynamic-form";
 import {Register, RegisterFormModel} from '../auth.model';
 
 @Component({
