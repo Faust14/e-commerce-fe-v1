@@ -64,21 +64,25 @@ export class EditUserComponent implements OnInit {
     if (this.authStoreService.getUser().id === this.userStoreService.getUser().id) {
       user.id = this.userStoreService.getUser().id;
       this.authStoreService.setUser(user);
-      this.updateUser(user);
+      this.userService.updateUser(user).subscribe({
+        next: () => {
+          this.alertService.success('User updated successfully.');
+          this.router.navigate(['/users']).then();
+        },
+        error: (err) => {
+          this.alertService.error(err.error().message);
+        }
+      });
     } else if (this.isAdmin() && this.authStoreService.getUser().id !== this.userStoreService.getUser().id) {
-      this.updateUser(user);
+      this.userService.updateUserRole(user.role, this.userStoreService.getUser().id).subscribe({
+        next: () => {
+          this.alertService.success('User role updated successfully.');
+          this.router.navigate(['/users']).then();
+        },
+        error: (err) => {
+          this.alertService.error(err.error().message);
+        }
+      });
     }
-  }
-
-  updateUser(user: User): void {
-    this.userService.updateUserRole(user.role, this.userStoreService.getUser().id).subscribe({
-      next: () => {
-        this.alertService.success('User updated successfully.');
-        this.router.navigate(['/users']).then();
-      },
-      error: (err) => {
-        this.alertService.error(err.error().message);
-      }
-    });
   }
 }

@@ -16,6 +16,10 @@ export class OrderService {
     return this.http.get<Order[]>(this.apiUrl);
   }
 
+  getOrderByUserId(userId: number): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}/user/${userId}`);
+  }
+
   deleteOrder(ordedrId: number, userId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${ordedrId}/${userId}`);
   }
