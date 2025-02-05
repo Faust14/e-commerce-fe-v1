@@ -32,7 +32,7 @@ export class CreateEditProductComponent implements OnInit, OnDestroy {
   categories: WritableSignal<Category[]> = signal<Category[]>([]);
 
   constructor(private productService: ProductService,
-              private productStoreService: ProductStoreService,
+              public productStoreService: ProductStoreService,
               private alertService: AlertService,
               private router: Router) {
   }
@@ -47,10 +47,26 @@ export class CreateEditProductComponent implements OnInit, OnDestroy {
       newProduct = this.createProductForEdit(newProduct);
       if (category) {
         newProduct.category = category;
-        this.createProduct(newProduct);
+        this.productService.updateProduct(newProduct).subscribe({
+          next: () => {
+            this.router.navigate(['/products']);
+            this.alertService.success('Product updated!');
+          },
+          error: (err) => {
+            this.alertService.error(err.error.message);
+          }
+        });
       }
-      this.createProduct(newProduct);
-      return;
+    } else {
+      this.productService.createProduct(newProduct).subscribe({
+        next: () => {
+          this.router.navigate(['/products']);
+          this.alertService.success('Product created!');
+        },
+        error: (err) => {
+          this.alertService.error(err.error.message);
+        }
+      });
     }
   }
 
@@ -69,20 +85,8 @@ export class CreateEditProductComponent implements OnInit, OnDestroy {
     }
   }
 
-  createProduct(product: Product) {
-    this.productService.createProduct(product).subscribe({
-      next: () => {
-        this.router.navigate(['/products']);
-        this.alertService.success('Product created!');
-      },
-      error: (err) => {
-        this.alertService.error(err.error.message);
-      }
-    });
-  }
 
   ngOnDestroy() {
-    this.productStoreService.setProduct(null!);
-    this.productStoreService.setEditMode(false);
+    this.productStoreService.clearState();
   }
 }

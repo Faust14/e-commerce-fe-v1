@@ -19,11 +19,11 @@ export class ProductService {
   }
 
   createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(`${this.apiUrl}/products/create`, product);
+    return this.http.post<Product>(`${this.apiUrl}/products`, product);
   }
 
   updateProduct(product: Product) {
-    return this.http.put(`${this.apiUrl}/products/update`, product);
+    return this.http.put(`${this.apiUrl}/products`, product);
   }
 
   deleteProduct(id: number): Observable<void> {
@@ -40,11 +40,11 @@ export class ProductService {
 
 
   createCategory(category: Category) {
-    return this.http.post<Category>(`${this.apiUrl}/categories/create`, category);
+    return this.http.post<Category>(`${this.apiUrl}/categories`, category);
   }
 
   updateCategory(category: Category) {
-    return this.http.put<Category>(`${this.apiUrl}/categories/`, category);
+    return this.http.put<Category>(`${this.apiUrl}/categories`, category);
   }
 
   deleteCategory(id: number) {

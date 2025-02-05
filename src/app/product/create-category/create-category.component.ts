@@ -4,6 +4,7 @@ import {Category} from '../model/category.model';
 import {ProductService} from '../product.service';
 import {Router} from '@angular/router';
 import {AlertService} from '../../shared/alert-service/alert.service';
+import {ProductStoreService} from '../productStoreService';
 
 @Component({
   selector: 'app-create-category',
@@ -17,23 +18,38 @@ import {AlertService} from '../../shared/alert-service/alert.service';
 export class CreateCategoryComponent {
 
   categoryFromModel = computed(() => ({
-    name: {value: '', required: true, min: 3, max: 32},
+    name: {value: this.productStoreService.getCategory()?.name || '', required: true, min: 3, max: 32},
   }))
 
   constructor(private productService: ProductService,
               private router: Router,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private productStoreService: ProductStoreService) {
   }
 
   onSubmit(category: Category) {
-    this.productService.createCategory(category).subscribe({
-      next: () => {
-        this.alertService.success('Category created');
-        this.router.navigate(['/products']).then();
-      },
-      error: (err) => {
-        this.alertService.error(err.error().message);
-      }
-    })
+    if (this.productStoreService.getEditMode()) {
+      category.id = this.productStoreService.getCategory().id;
+      this.productService.updateCategory(category).subscribe({
+        next: () => {
+          this.productStoreService.clearState();
+          this.alertService.success('Category updated!');
+          this.router.navigate(['/products']).then();
+        },
+        error: (err) => {
+          this.alertService.error(err.error.message);
+        }
+      })
+    } else {
+      this.productService.createCategory(category).subscribe({
+        next: () => {
+          this.alertService.success('Category created');
+          this.router.navigate(['/products']).then();
+        },
+        error: (err) => {
+          this.alertService.error(err.error().message);
+        }
+      })
+    }
   }
 }

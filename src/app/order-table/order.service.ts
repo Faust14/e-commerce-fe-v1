@@ -21,6 +21,6 @@ export class OrderService {
   }
 
   deleteOrder(ordedrId: number, userId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/delete/${ordedrId}/${userId}`);
+    return this.http.delete<void>(`${this.apiUrl}/${ordedrId}/${userId}`);
   }
 }

@@ -45,12 +45,9 @@ import { generateFormFields } from '../utils/generateFormFields';
             <mat-label>{{ key | titlecase }}</mat-label>
             <input
               matInput
-              [type]="passwordVisibility[key] ? 'text' : 'password'"
+              [type]="'password'"
               [formControlName]="key"
               [disabled]="isFieldDisabled(key)">
-            <button *ngIf="!isFieldDisabled(key)" mat-icon-button matSuffix (click)="togglePasswordVisibility(key)">
-              <mat-icon>{{ passwordVisibility[key] ? 'visibility' : 'visibility_off' }}</mat-icon>
-            </button>
           </mat-form-field>
 
           <!-- Text, Number, or Textarea Inputs -->
@@ -178,7 +175,7 @@ export class DynamicForm<T extends object> implements OnInit {
   }
 
   isPasswordField(key: string): boolean {
-    return key.toLowerCase() === 'password'; // Ensures only the password field is treated as a password
+    return key.toLowerCase() === 'password';
   }
 
   isTextareaField(key: string): boolean {

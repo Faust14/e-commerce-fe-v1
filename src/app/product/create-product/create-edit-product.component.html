@@ -1,5 +1,5 @@
 <app-dynamic-form
   [model]="productModel()"
-  formTitle="Create Product"
+  [formTitle]="productStoreService.getEditMode() ?'Edit product':'Create Product'"
   (formSubmit)="onSubmit($event)"
 ></app-dynamic-form>

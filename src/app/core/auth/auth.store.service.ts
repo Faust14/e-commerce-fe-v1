@@ -7,7 +7,7 @@ import {User} from '../../user/model/user.model';
 })
 export class AuthStoreService {
   private _user = new BehaviorSubject<User>(null!);
-  private user$ = this._user.asObservable();
+  user$ = this._user.asObservable();
 
   setUser(user: User) {
     this._user.next(user);

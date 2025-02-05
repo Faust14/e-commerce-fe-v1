@@ -1,6 +1,8 @@
 <app-search (searchTerm)="filterCategories($event)"/>
 <app-dynamic-table
   [data]="categoryList()"
-  [editActionEnabled]="false"
+  [editActionEnabled]="true"
   [deleteActionEnabled]="true"
-  (delete)="onDeleteCategory($event)"/>
+  (delete)="onDeleteCategory($event)"
+  (edit)="onEditCategory($event)"
+  />

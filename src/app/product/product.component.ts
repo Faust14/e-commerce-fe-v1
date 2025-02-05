@@ -70,8 +70,12 @@ export class Products implements OnInit {
 
   onDeleteClick(product: Product) {
       this.productService.deleteProduct(product.id).subscribe({
-        next: () => this.productList.set(this.productList().filter(p => p.id !== product.id)),
+        next: () => {
+          this.alertService.success('Product deleted successfully.');
+          this.productList.set(this.productList().filter(p => p.id !== product.id))
+        },
         error: (err) => {
+          this.alertService.error(err.error.message);
           console.error('Error fetching users:', err);
         }
       })
