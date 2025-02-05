@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {MatFormField, MatFormFieldModule, MatLabel} from '@angular/material/form-field';
-import {MatIcon, MatIconModule} from '@angular/material/icon';
-import {MatInput, MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
-import {CommonModule, NgIf} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-search',
@@ -35,6 +35,7 @@ import {CommonModule, NgIf} from '@angular/common';
 export class SearchComponent {
   @Output() searchTerm = new EventEmitter<string>();
   searchText: string = '';
+
   onSearch(): void {
     this.searchTerm.emit(this.searchText.trim());
   }

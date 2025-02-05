@@ -10,12 +10,12 @@
             <mat-card-subtitle>Quantity: {{ product.quantity }}</mat-card-subtitle>
           </div>
           <div *ngIf="authStoreService.getUser().role === role.ADMIN">
-          <button mat-icon-button color="primary" (click)="onEditClick(product)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="primary" (click)="onDeleteClick(product)">
-            <mat-icon>delete</mat-icon>
-          </button>
+            <button mat-icon-button color="primary" (click)="onEditClick(product)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="onDeleteClick(product)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
         </div>
       </mat-card-header>
@@ -26,8 +26,11 @@
       </mat-card-content>
       <mat-card-actions align="end">
         <div>
-        <mat-error *ngIf="product.quantity === 0">Product is out of stock</mat-error> <br>
-        <button mat-raised-button color="primary" [disabled]="product.quantity === 0" (click)="addToCart(product)">Add to Cart</button>
+          <mat-error *ngIf="product.quantity === 0">Product is out of stock</mat-error>
+          <br>
+          <button mat-raised-button color="primary" [disabled]="product.quantity === 0" (click)="addToCart(product)">Add
+            to Cart
+          </button>
         </div>
       </mat-card-actions>
     </mat-card>

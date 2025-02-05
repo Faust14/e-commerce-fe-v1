@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, OnDestroy, OnInit, signal} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {User} from './model/user.model';
 import {UserService} from './user.service';
 import {DynamicTableComponent} from '../shared/dynamic-table/dynamic-table.component';
@@ -18,7 +18,6 @@ import {useSearch} from '../shared/utils/searchUtil';
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
-//TODO: ocisti user-a
 export class UserComponent implements OnInit {
 
   userList = signal<User[]>([])

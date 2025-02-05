@@ -8,6 +8,7 @@ export interface Product {
   description: string;
   quantity: number;
 }
+
 export interface ProductFormModel {
   name: { value: string; required: boolean, minLength: 3 };
   description?: { value: string };

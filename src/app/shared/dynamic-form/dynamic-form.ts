@@ -161,7 +161,6 @@ export class DynamicForm<T extends object> implements OnInit {
   ngOnInit() {
     this.formGroup = generateFormFields(this.model);
     this.fieldKeys = Object.keys(this.model);
-    console.log('Field Keys:', this.fieldKeys);
   }
 
   getInputType(key: string): string {

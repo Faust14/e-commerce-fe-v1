@@ -31,7 +31,8 @@
       <mat-icon class="icon-navbar">category</mat-icon>
       Create Category
     </div>
-    <div *ngIf="authStoreService.getUser().role === role.ADMIN" class="sub-menu-item" routerLink="/view-categories" routerLinkActive="active">
+    <div *ngIf="authStoreService.getUser().role === role.ADMIN" class="sub-menu-item" routerLink="/view-categories"
+         routerLinkActive="active">
       <mat-icon class="icon-navbar">table</mat-icon>
       View categories
     </div>

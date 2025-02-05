@@ -21,7 +21,7 @@ import {EMPTY} from 'rxjs';
 export class LoginComponent {
   errorMessage: string | null = null;
   loginFormModel: Signal<CredentialsFormModel> = computed(() => ({
-    username: {value: '', required: true, minLength:3},
+    username: {value: '', required: true, minLength: 3},
     password: {value: '', required: true, minLength: 6, password: true}
   }));
 

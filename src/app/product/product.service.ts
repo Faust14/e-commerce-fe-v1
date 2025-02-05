@@ -32,10 +32,10 @@ export class ProductService {
 
   getCategories(search?: string): Observable<Category[]> {
     let params;
-    if(search) {
-       params = new HttpParams().append('search', search);
+    if (search) {
+      params = new HttpParams().append('search', search);
     }
-    return this.http.get<Category[]>(`${this.apiUrl}/categories`,{params});
+    return this.http.get<Category[]>(`${this.apiUrl}/categories`, {params});
   }
 
 

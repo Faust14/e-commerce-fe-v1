@@ -2,5 +2,7 @@
   [model]="registerFormModel()"
   formTitle="Create Product"
   (formSubmit)="register($event)"
-> <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div></app-dynamic-form>
+>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</app-dynamic-form>
 <a class="link" routerLink="/login">Go back to login</a>

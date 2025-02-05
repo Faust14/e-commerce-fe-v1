@@ -12,22 +12,23 @@
     </thead>
     <tbody>
     <ng-container *ngFor="let order of orders; trackBy: trackByFn">
-      <!-- Glavni red narudžbine -->
       <tr class="border-bottom">
         <td>{{ order.id }}</td>
         <td>{{ order.userResponse.firstname }}</td>
         <td>{{ order.userResponse.lastname }}</td>
         <td>{{ order.userResponse.username }}</td>
         <td>{{ order.localDateTime | date:'dd.MM.yyyy HH:mm' }}</td>
-        <td><button mat-icon-button color="warn"  (click)="onDelete(order)">
-          <mat-icon>delete</mat-icon>
-        </button></td>
         <td>
-          <mat-icon class="pointer" (click)="toggleRow(order)" [ngClass]="!isExpanded(order) ? 'expendedItem':''">keyboard_arrow_up</mat-icon>
+          <button mat-icon-button color="warn" (click)="onDelete(order)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+        <td>
+          <mat-icon class="pointer" (click)="toggleRow(order)" [ngClass]="!isExpanded(order) ? 'expendedItem':''">
+            keyboard_arrow_up
+          </mat-icon>
         </td>
       </tr>
-
-      <!-- Ugnježdena tabela sa proizvodima -->
       <tr *ngIf="isExpanded(order)">
         <td colspan="6" class="nested-cell">
           <table class="border-bottom-product">
@@ -39,7 +40,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr  *ngFor="let product of order.products">
+            <tr *ngFor="let product of order.products">
               <td>{{ product.name }}</td>
               <td>{{ product.description }}</td>
               <td>{{ product.price | currency }}</td>

@@ -18,9 +18,11 @@ export class ProductStoreService {
   getProduct() {
     return this._product.getValue();
   }
+
   setEditMode(isEditMode: boolean) {
     this._editMode.next(isEditMode);
   }
+
   getEditMode() {
     return this._editMode.getValue();
   }

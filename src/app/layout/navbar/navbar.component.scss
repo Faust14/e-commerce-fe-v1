@@ -1,7 +1,6 @@
-
-/* ==========================================================================
+/* ==================================
 Main Menu
-========================================================================== */
+===================================== */
 .co-main-menu {
   position: fixed;
   top: 0;
@@ -53,7 +52,6 @@ h1 {
   white-space: nowrap;
   font-size: 26px;
   padding: 10px;
-  position: relative;
 }
 
 .hover-bg-lighten {
@@ -73,6 +71,7 @@ h1 {
   color: white;
   opacity: 0.3;
 }
+
 .sub-menu {
   background-color: #35353f;
   padding-left: 20px;
@@ -80,6 +79,7 @@ h1 {
   flex-direction: column;
   padding-bottom: 20px;
 }
+
 .sub-menu-item mat-icon {
   margin-right: 8px;
 }
@@ -88,9 +88,9 @@ h1 {
   background-color: rgba(#fff, 0.5);
 }
 
-/* ==========================================================================
+/* =======================
 Navbar
-========================================================================== */
+========================== */
 .co-navbar.menu-closed {
   inset-inline-start: 200px;
 }

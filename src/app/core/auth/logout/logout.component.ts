@@ -28,8 +28,9 @@ export class LogoutComponent implements OnInit {
               private authService: AuthService,
               private userStoreService: UserStoreService) {
   }
+
   ngOnInit() {
-   this.createInitials();
+    this.createInitials();
   }
 
   createInitials() {
@@ -42,6 +43,7 @@ export class LogoutComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']).then();
   }
+
   onEditUserClick() {
     this.userStoreService.setUser(this.authStoreService.getUser());
     this.router.navigate(['/edit-user']).then();

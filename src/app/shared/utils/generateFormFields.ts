@@ -1,4 +1,4 @@
-import { FormControl, FormGroup, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import {FormControl, FormGroup, Validators, ValidatorFn, AbstractControl} from '@angular/forms';
 
 export function generateFormFields<T extends object>(model: T): FormGroup {
   const formGroup: { [key: string]: FormControl } = {};
@@ -40,7 +40,7 @@ export function generateFormFields<T extends object>(model: T): FormGroup {
       }
     }
 
-    formGroup[key] = new FormControl({ value, disabled: field.disabled ?? false }, validators);
+    formGroup[key] = new FormControl({value, disabled: field.disabled ?? false}, validators);
   });
 
   return new FormGroup(formGroup);
@@ -49,7 +49,7 @@ export function generateFormFields<T extends object>(model: T): FormGroup {
 function requiredNonZeroNumber(): ValidatorFn {
   return (control: AbstractControl) => {
     if (control.value === 0) {
-      return { nonZero: true };
+      return {nonZero: true};
     }
     return null;
   };

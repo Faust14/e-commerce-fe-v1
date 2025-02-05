@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable, tap, throwError} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
@@ -7,15 +7,17 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {AuthStoreService} from './auth.store.service';
 import {User} from '../../user/model/user.model';
 
-  @Injectable({
-    providedIn: 'root'
-  })
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   private apiUrl = 'http://localhost:8081/api/auth';
   private tokenSubject = new BehaviorSubject<string | null>(null);
   private refreshTokenSubject = new BehaviorSubject<string | null>(null);
   private jwtHelper = new JwtHelperService();
-  constructor(private http: HttpClient, private authStoreService: AuthStoreService) {}
+
+  constructor(private http: HttpClient, private authStoreService: AuthStoreService) {
+  }
 
   login(credentials: Credentials): Observable<{ jtwToken: string, user: User }> {
     return this.http.post<{ jtwToken: string, user: User }>(`${this.apiUrl}/login`, credentials).pipe(
@@ -52,7 +54,9 @@ export class AuthService {
   }
 
   refreshAccessToken(): Observable<string> {
-    return this.http.post<{ accessToken: string }>(`${this.apiUrl}/refresh`, { refreshToken: this.refreshTokenSubject.value }).pipe(
+    return this.http.post<{
+      accessToken: string
+    }>(`${this.apiUrl}/refresh`, {refreshToken: this.refreshTokenSubject.value}).pipe(
       map(response => response.accessToken),
       tap(accessToken => {
         this.tokenSubject.next(accessToken);

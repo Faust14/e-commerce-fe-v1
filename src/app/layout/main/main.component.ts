@@ -6,11 +6,13 @@ import {RouterOutlet} from '@angular/router';
   standalone: true,
   selector: 'app-main',
   template: `
-            <div class="main-wrapper">
-                <app-navbar />
-              <div> <router-outlet></router-outlet></div>
-            </div>
-    `,
+    <div class="main-wrapper">
+      <app-navbar/>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  `,
   styleUrls: ['./main.component.scss'],
   imports: [
     NavbarComponent,

@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Order } from './model';
-import { OrderService } from './order.service';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Order} from './model';
+import {OrderService} from './order.service';
 import {CurrencyPipe, DatePipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
@@ -28,7 +28,8 @@ export class OrderTableComponent implements OnInit {
 
   constructor(private orderService: OrderService,
               private cdr: ChangeDetectorRef,
-              private authStoreService: AuthStoreService,) {}
+              private authStoreService: AuthStoreService,) {
+  }
 
   ngOnInit() {
     this.getAllOrders();
@@ -53,12 +54,13 @@ export class OrderTableComponent implements OnInit {
 
   onDelete(order: Order) {
     this.orderService.deleteOrder(order.id, this.authStoreService.getUser().id).subscribe({
-      next: (data) => this.orders = this.orders.filter(o=> o.id !== order.id),
+      next: (data) => this.orders = this.orders.filter(o => o.id !== order.id),
       error: (err) => {
         console.error('Error fetching users:', err);
       }
     })
   }
+
   trackByFn(index: number, item: Order) {
     return item.id;
   }

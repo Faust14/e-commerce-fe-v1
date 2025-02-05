@@ -31,7 +31,7 @@ export class CartComponent {
               private cartService: CartService,
               private authStoreService: AuthStoreService,
               private alertService: AlertService) {
-    this.cart = toSignal(this.cartStoreService.getCart(), { initialValue: [] });
+    this.cart = toSignal(this.cartStoreService.getCart(), {initialValue: []});
   }
 
   removeFromCart(productId: number) {
@@ -44,8 +44,8 @@ export class CartComponent {
 
   createOrder() {
     const order: CartModel = {
-      userId:this.authStoreService.getUser().id,
-      productIds:this.cart().map((product: Product) => product.id)
+      userId: this.authStoreService.getUser().id,
+      productIds: this.cart().map((product: Product) => product.id)
     }
     this.cartService.createOrder(order).subscribe({
       next: (data) => {

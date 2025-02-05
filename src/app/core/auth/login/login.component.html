@@ -2,6 +2,8 @@
   [model]="loginFormModel()"
   formTitle="Login"
   (formSubmit)="login($event)"
-> <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div></app-dynamic-form>
+>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</app-dynamic-form>
 <p class="link">Don't have an account?</p>
 <a class="link" routerLink="/register"> Register here</a>
