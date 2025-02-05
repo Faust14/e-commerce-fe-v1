@@ -104,7 +104,7 @@ import { generateFormFields } from '../utils/generateFormFields';
           <ng-content class="content"></ng-content>
         </ng-container>
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.invalid">
+        <button mat-raised-button color="primary" type="submit" class="submit" [disabled]="formGroup.invalid">
           Submit
         </button>
       </form>
@@ -118,6 +118,23 @@ import { generateFormFields } from '../utils/generateFormFields';
       background: white;
       border-radius: 8px;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .submit {
+      padding: 16px !important;
+    }
+
+    mat-form-field {
+      width: 100%;
+      margin-bottom: -10px;
+      margin-top: 10px;
+    }
+
+    mat-error {
+      margin-top: -5px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: #f44336;
     }
 
     .full-width {

@@ -4,6 +4,7 @@ import {RouterLink, RouterLinkActive} from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
 import {AuthStoreService} from '../../core/auth/auth.store.service';
 import {roles} from '../../shared/enums/roles';
+import {LogoutComponent} from '../../core/auth/logout/logout.component';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,8 @@ import {roles} from '../../shared/enums/roles';
     RouterLinkActive,
     RouterLink,
     MatIcon,
-    NgIf
+    NgIf,
+    LogoutComponent
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'

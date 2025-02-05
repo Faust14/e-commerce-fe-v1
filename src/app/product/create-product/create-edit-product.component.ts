@@ -5,6 +5,7 @@ import {DynamicForm} from '../../shared/dynamic-form/dynamic-form';
 import {Product, ProductFormModel} from '../model/product.model';
 import {ProductStoreService} from '../productStoreService';
 import {Router} from '@angular/router';
+import {AlertService} from '../../shared/alert-service/alert.service';
 
 @Component({
   selector: 'app-create-product',
@@ -32,6 +33,7 @@ export class CreateEditProductComponent implements OnInit, OnDestroy {
 
   constructor(private productService: ProductService,
               private productStoreService: ProductStoreService,
+              private alertService: AlertService,
               private router: Router) {
   }
 
@@ -69,9 +71,12 @@ export class CreateEditProductComponent implements OnInit, OnDestroy {
 
   createProduct(product: Product) {
     this.productService.createProduct(product).subscribe({
-      next: () => this.router.navigate(['/products']),
+      next: () => {
+        this.router.navigate(['/products']);
+        this.alertService.success('Product created!');
+      },
       error: (err) => {
-        console.error('Error fetching users:', err);
+        this.alertService.error(err.error.message);
       }
     });
   }

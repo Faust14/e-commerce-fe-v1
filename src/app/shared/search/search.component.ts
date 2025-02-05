@@ -28,6 +28,7 @@ import {CommonModule, NgIf} from '@angular/common';
       width: 25%;
       padding: 16px;
       background-color: white;
+      margin-top: 16px;
     }
   `]
 })

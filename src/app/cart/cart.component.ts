@@ -8,6 +8,7 @@ import {CartService} from './cart-service';
 import {AuthStoreService} from '../core/auth/auth.store.service';
 import {CartModel} from './cart-model';
 import {Product} from '../product/model/product.model';
+import {AlertService} from '../shared/alert-service/alert.service';
 
 @Component({
   selector: 'app-cart',
@@ -28,7 +29,8 @@ export class CartComponent {
 
   constructor(public cartStoreService: CartStoreService,
               private cartService: CartService,
-              private authStoreService: AuthStoreService) {
+              private authStoreService: AuthStoreService,
+              private alertService: AlertService) {
     this.cart = toSignal(this.cartStoreService.getCart(), { initialValue: [] });
   }
 
@@ -46,9 +48,12 @@ export class CartComponent {
       productIds:this.cart().map((product: Product) => product.id)
     }
     this.cartService.createOrder(order).subscribe({
-      next: (data) => this.cartStoreService.clearCart(),
+      next: (data) => {
+        this.alertService.success('Order successfully created!');
+        this.cartStoreService.clearCart();
+      },
       error: (err) => {
-        console.error('Error fetching users:', err);
+        this.alertService.error(err.error.message);
       }
     })
   }

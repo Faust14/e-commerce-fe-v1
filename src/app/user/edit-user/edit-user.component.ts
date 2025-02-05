@@ -6,6 +6,7 @@ import {UserStoreService} from '../user-store-service';
 import {User} from '../model/user.model';
 import {UserService} from '../user.service';
 import {Router} from '@angular/router';
+import {AlertService} from '../../shared/alert-service/alert.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -43,7 +44,8 @@ export class EditUserComponent implements OnInit {
   constructor(private authStoreService: AuthStoreService,
               private userStoreService: UserStoreService,
               private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -62,19 +64,21 @@ export class EditUserComponent implements OnInit {
     if (this.authStoreService.getUser().id === this.userStoreService.getUser().id) {
       user.id = this.userStoreService.getUser().id;
       this.authStoreService.setUser(user);
-      this.userService.updateUser(user).subscribe({
-        next: () => this.router.navigate(['/users']),
-        error: (err) => {
-          console.error('Error fetching users:', err);
-        }
-      });
+      this.updateUser(user);
     } else if (this.isAdmin() && this.authStoreService.getUser().id !== this.userStoreService.getUser().id) {
-      this.userService.updateUserRole(user.role, this.userStoreService.getUser().id).subscribe({
-        next: () => this.router.navigate(['/users']),
-        error: (err) => {
-          console.error('Error fetching users:', err);
-        }
-      });
+      this.updateUser(user);
     }
+  }
+
+  updateUser(user: User): void {
+    this.userService.updateUserRole(user.role, this.userStoreService.getUser().id).subscribe({
+      next: () => {
+        this.alertService.success('User updated successfully.');
+        this.router.navigate(['/users']).then();
+      },
+      error: (err) => {
+        this.alertService.error(err.error().message);
+      }
+    });
   }
 }

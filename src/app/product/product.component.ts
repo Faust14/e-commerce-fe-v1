@@ -12,6 +12,8 @@ import {AuthStoreService} from '../core/auth/auth.store.service';
 import {roles} from '../shared/enums/roles';
 import {useSearch} from '../shared/utils/searchUtil';
 import {CartStoreService} from '../cart/cart-store.service';
+import {AlertService} from '../shared/alert-service/alert.service';
+import {MatError} from '@angular/material/form-field';
 
 @Component({
   selector: 'app-product',
@@ -24,7 +26,8 @@ import {CartStoreService} from '../cart/cart-store.service';
     MatButtonModule,
     NgFor,
     SearchComponent,
-    MatIcon
+    MatIcon,
+    MatError
   ]
 })
 export class Products implements OnInit {
@@ -37,6 +40,7 @@ export class Products implements OnInit {
               private productStoreService: ProductStoreService,
               private cartStoreService: CartStoreService,
               private router: Router,
+              private alertService: AlertService,
               public authStoreService: AuthStoreService) {
   }
 
@@ -75,5 +79,6 @@ export class Products implements OnInit {
 
   addToCart(product: Product) {
     this.cartStoreService.addToCart(product);
+    this.alertService.info('Product added to cart successfully.');
   }
 }

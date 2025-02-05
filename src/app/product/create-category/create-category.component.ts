@@ -3,6 +3,7 @@ import {DynamicForm} from '../../shared/dynamic-form/dynamic-form';
 import {Category} from '../model/category.model';
 import {ProductService} from '../product.service';
 import {Router} from '@angular/router';
+import {AlertService} from '../../shared/alert-service/alert.service';
 
 @Component({
   selector: 'app-create-category',
@@ -19,14 +20,19 @@ export class CreateCategoryComponent {
     name: {value: '', required: true, min: 3, max: 32},
   }))
 
-  constructor(private productService: ProductService, private router: Router) {
+  constructor(private productService: ProductService,
+              private router: Router,
+              private alertService: AlertService) {
   }
 
   onSubmit(category: Category) {
     this.productService.createCategory(category).subscribe({
-      next: () => this.router.navigate(['/products']),
+      next: () => {
+        this.alertService.success('Category created');
+        this.router.navigate(['/products']).then();
+      },
       error: (err) => {
-        console.error('Error fetching users:', err);
+        this.alertService.error(err.error().message);
       }
     })
   }

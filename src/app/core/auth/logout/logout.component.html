@@ -1,0 +1,20 @@
+<div class="user-avatar">
+  <button
+    mat-button
+    [matMenuTriggerFor]="menu"
+    class="avatar-circle"
+    aria-label="User Menu"
+  >
+    {{ initials() }}
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onEditUserClick()">
+      <mat-icon>edit</mat-icon>
+      <span>Edit User</span>
+    </button>
+    <button mat-menu-item (click)="onLogoutClick()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</div>
