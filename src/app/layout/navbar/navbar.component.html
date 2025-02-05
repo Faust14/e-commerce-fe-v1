@@ -5,30 +5,35 @@
   </div>
   <div
     class="hover-bg-lighten d-flex align-items-center co-main-menu-item"
-    routerLinkActive="active"
-    [routerLinkActiveOptions]="{ exact: true }"
-    routerLink="/products"
   >
     <div class="navbar-item ">
-      <div class="co-main-menu-label">
+      <div class="co-main-menu-label" (click)="expendProduct()">
         Products
       </div>
-      <mat-icon (click)="expendProduct()" [ngClass]="isProductExpended ? 'expendedItem':''">keyboard_arrow_up</mat-icon>
+      <mat-icon [ngClass]="isProductExpended ? 'expendedItem':''">keyboard_arrow_up</mat-icon>
     </div>
   </div>
 
   <div class="sub-menu" *ngIf="isProductExpended">
-    <div class="sub-menu-item" routerLink="/create-category" routerLinkActive="active">
+    <div *ngIf="authStoreService.getUser().role === role.ADMIN" class="sub-menu-item" routerLink="/create-edit-product"
+         routerLinkActive="active">
+      <mat-icon class="icon-navbar">add</mat-icon>
+      Create product
+    </div>
+    <div class="sub-menu-item" routerLinkActive="active"
+         routerLink="/products">
+      <mat-icon class="icon-navbar">table</mat-icon>
+      View products
+    </div>
+
+    <div *ngIf="authStoreService.getUser().role === role.ADMIN" class="sub-menu-item" routerLink="/create-category"
+         routerLinkActive="active">
       <mat-icon class="icon-navbar">category</mat-icon>
       Create Category
     </div>
-    <div class="sub-menu-item" routerLink="/view-categories" routerLinkActive="active">
+    <div *ngIf="authStoreService.getUser().role === role.ADMIN" class="sub-menu-item" routerLink="/view-categories" routerLinkActive="active">
       <mat-icon class="icon-navbar">table</mat-icon>
       View categories
-    </div>
-    <div class="sub-menu-item" routerLink="/create-edit-product" routerLinkActive="active">
-      <mat-icon class="icon-navbar">add</mat-icon>
-      Create product
     </div>
   </div>
 
@@ -47,23 +52,25 @@
   </div>
 
   <div class="sub-menu" *ngIf="orderExpended">
-    <div class="sub-menu-item" routerLink="/create-category" routerLinkActive="active">
+    <div class="sub-menu-item" routerLink="/cart" routerLinkActive="active">
       <mat-icon class="icon-navbar">shop</mat-icon>
-      Order
+      Cart
     </div>
-    <div class="sub-menu-item" routerLink="/create-edit-product" routerLinkActive="active">
-      <mat-icon class="icon-navbar">edit</mat-icon>
-      Edit User
+    <div class="sub-menu-item" routerLink="/order-table" routerLinkActive="active">
+      <mat-icon class="icon-navbar">table</mat-icon>
+      Orders
     </div>
   </div>
 
   <div
+    *ngIf="authStoreService.getUser().role === role.ADMIN"
     class="hover-bg-lighten d-flex align-items-center co-main-menu-item"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
     routerLink="/users">
     <div class="navbar-item ">
       <div class="co-main-menu-label">
+        <mat-icon class="icon-navbar">person</mat-icon>
         Users
       </div>
     </div>
@@ -73,7 +80,7 @@
 
 <div
   class="bg-primary d-flex align-items-center co-navbar justify-content-between"
-  [ngClass]="isNavbarClosed ? 'menu-closed' : 'menu-open'"
+  [ngClass]="'menu-open'"
 >
 </div>
 

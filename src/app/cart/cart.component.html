@@ -1,0 +1,26 @@
+<div class="cart-container">
+  <h2>Shopping Cart</h2>
+
+  <div *ngIf="(cart()?.length ?? 0) === 0" class="empty-cart">
+    Your cart is empty
+  </div>
+
+  <ul *ngIf="(cart()?.length ?? 0) > 0" class="cart-list">
+    <li *ngFor="let item of cart()" class="cart-item">
+      <div class="item-details">
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.price | currency }}</p>
+      </div>
+      <mat-icon class="remove-btn" (click)="removeFromCart(item.id)">clear</mat-icon>
+    </li>
+  </ul>
+
+  <div class="sum-class">
+    <h3 class="mr1">Sum: </h3>
+    <p> {{ (cartStoreService.sum$ | async) | currency }} </p>
+  </div>
+  <div class="action-buttons">
+    <button *ngIf="(cart()?.length ?? 0) > 0" (click)="clearCart()" mat-raised-button class="clear-btn">Clear</button>
+    <button *ngIf="(cart()?.length ?? 0) > 0" (click)="createOrder()" mat-raised-button color="primary">Order</button>
+  </div>
+</div>

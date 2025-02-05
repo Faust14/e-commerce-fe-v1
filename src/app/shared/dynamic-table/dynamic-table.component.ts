@@ -23,6 +23,7 @@ import { generateTableHeaders } from '../utils/generateTableHeaders';
       <table mat-table [dataSource]="dataSignal()" matSort>
 
         <!-- Dynamic Columns -->
+        <div >
         <ng-container *ngFor="let header of headers()" [matColumnDef]="header.key">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
             {{ header.label }}
@@ -31,15 +32,15 @@ import { generateTableHeaders } from '../utils/generateTableHeaders';
             {{ element[header.key] }}
           </td>
         </ng-container>
-
+        </div>
         <!-- Action Buttons (Edit/Delete) -->
-        <ng-container *ngIf="actionsEnabled" [matColumnDef]="'actions'">
+        <ng-container *ngIf="editActionEnabled || deleteActionEnabled" [matColumnDef]="'actions'">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-icon-button color="primary" (click)="edit.emit(element)">
+            <button mat-icon-button color="primary" *ngIf="editActionEnabled" (click)="edit.emit(element)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button color="warn" (click)="delete.emit(element)">
+            <button mat-icon-button color="warn" *ngIf="deleteActionEnabled" (click)="delete.emit(element)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>
@@ -49,22 +50,23 @@ import { generateTableHeaders } from '../utils/generateTableHeaders';
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
       </table>
-
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
   `,
   styles: [`
     .max-width{
-      max-width: 86%;
+      max-width: 96%;
     }
   `]
 })
 export class DynamicTableComponent<T> {
   @Input() set data(value: T[]) {
-    this.dataSignal.set(value); // ✅ Automatically updates when `data` changes
+    this.dataSignal.set(value);
   }
-  @Input() actionsEnabled = false;
-
+  @Input()
+  hideHeaders = false;
+  @Input() editActionEnabled = false;
+  @Input() deleteActionEnabled = false;
   @Output() edit = new EventEmitter<T>();
   @Output() delete = new EventEmitter<T>();
 
@@ -74,7 +76,7 @@ export class DynamicTableComponent<T> {
 
   get displayedColumns(): string[] {
     const columns = this.headers().map(header => header.key);
-    if (this.actionsEnabled) {
+    if (this.editActionEnabled || this.deleteActionEnabled ) {
       columns.push('actions');
     }
     return columns;

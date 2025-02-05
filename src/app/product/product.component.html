@@ -1,5 +1,5 @@
 <div class="product">
-  <app-search (searchTerm)="filterProducts($event)"></app-search>
+  <app-search (searchTerm)="filterProducts($event)"/>
 
   <div class="product-container">
     <mat-card *ngFor="let product of productList()" class="product-card">
@@ -9,18 +9,23 @@
             <mat-card-title>{{ product.name }}</mat-card-title>
             <mat-card-subtitle>Quantity: {{ product.quantity }}</mat-card-subtitle>
           </div>
+          <div *ngIf="authStoreService.getUser().role === role.ADMIN">
           <button mat-icon-button color="primary" (click)="onEditClick(product)">
             <mat-icon>edit</mat-icon>
           </button>
+          <button mat-icon-button color="primary" (click)="onDeleteClick(product)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          </div>
         </div>
       </mat-card-header>
       <mat-card-content>
-        <p>{{ product.description }}</p>
+        <mat-card-subtitle>Description:  {{ product.description }}</mat-card-subtitle>
         <p><strong>Price:</strong> {{ product.price | currency }}</p>
-        <p>{{ product.category.name }}</p>
+        <mat-card-subtitle>Category: {{ product.category.name }}</mat-card-subtitle>
       </mat-card-content>
       <mat-card-actions align="end">
-        <button mat-raised-button color="primary">Add to Cart</button>
+        <button mat-raised-button color="primary" (click)="addToCart(product)">Add to Cart</button>
       </mat-card-actions>
     </mat-card>
     <br>

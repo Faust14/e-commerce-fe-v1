@@ -1,0 +1,87 @@
+/* Glavni kontejner */
+.table-container {
+  width: 96%;
+  padding: 16px;
+  background-color: #faf9fd;
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+/* Glavna tabela */
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  text-align: left;
+  background-color: #faf9fd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.order-table thead {
+  background-color: #faf9fd;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.order-table th {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px;
+  text-transform: capitalize;
+}
+
+.order-table td {
+  padding: 6px;
+}
+
+.border-bottom {
+  width: 100%;
+  border-bottom: 1px solid #454545;
+}
+.border-bottom-product {
+  width: 100%;
+  margin-top: 16px;
+  border-bottom: 1px solid #d1d1d1;
+}
+/* Dugme za expand/collapse */
+.expand-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.expand-btn:hover {
+  color: #1976d2;
+}
+
+.nested-cell {
+  background-color: #faf9fd;
+  padding: 0;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.product-table th,
+.product-table td {
+  padding: 6px;
+  border-bottom: none !important;
+}
+
+.product-table thead {
+  background-color: #faf9fd;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.expendedItem {
+  transform: rotate(180deg);
+}

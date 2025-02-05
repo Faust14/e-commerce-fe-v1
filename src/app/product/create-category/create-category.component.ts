@@ -1,11 +1,8 @@
-import {Component, computed, Signal} from '@angular/core';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatInput} from '@angular/material/input';
-import {ReactiveFormsModule} from '@angular/forms';
-import {MatButton} from '@angular/material/button';
+import {Component, computed} from '@angular/core';
 import {DynamicForm} from '../../shared/dynamic-form/dynamic-form';
-import {Category, CategoryFormModel} from '../model/category.model';
+import {Category} from '../model/category.model';
 import {ProductService} from '../product.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-category',
@@ -22,10 +19,15 @@ export class CreateCategoryComponent {
     name: {value: '', required: true, min: 3, max: 32},
   }))
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private router: Router) {
   }
 
   onSubmit(category: Category) {
-    this.productService.createCategory(category).subscribe()
+    this.productService.createCategory(category).subscribe({
+      next: () => this.router.navigate(['/products']),
+      error: (err) => {
+        console.error('Error fetching users:', err);
+      }
+    })
   }
 }

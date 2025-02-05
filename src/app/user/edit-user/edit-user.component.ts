@@ -5,6 +5,7 @@ import {AuthStoreService} from '../../core/auth/auth.store.service';
 import {UserStoreService} from '../user-store-service';
 import {User} from '../model/user.model';
 import {UserService} from '../user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-edit-user',
@@ -20,11 +21,17 @@ export class EditUserComponent implements OnInit {
   roles = Object.values(roles);
 
   userFormModel = computed(() => ({
-    firstname: { value: this.user()?.firstname, required: true, minLength: 3, disabled: this.isFormFieldDisabled()},
-    lastname: { value: this.user()?.lastname, required: true, minLength: 3, disabled: this.isFormFieldDisabled() },
-    email: { value: this.user()?.email, required: true, disabled: this.isFormFieldDisabled() },
-    password: { value: this.user()?.password, required: true, password: true, minLength: 6, disabled: this.isFormFieldDisabled() },
-    username: { value: this.user()?.username, required: true, minLength: 3, disabled: this.isFormFieldDisabled() },
+    firstname: {value: this.user()?.firstname, required: true, minLength: 3, disabled: this.isFormFieldDisabled()},
+    lastname: {value: this.user()?.lastname, required: true, minLength: 3, disabled: this.isFormFieldDisabled()},
+    email: {value: this.user()?.email, required: true, disabled: this.isFormFieldDisabled()},
+    password: {
+      value: this.user()?.password,
+      required: true,
+      password: true,
+      minLength: 6,
+      disabled: this.isFormFieldDisabled()
+    },
+    username: {value: this.user()?.username, required: true, minLength: 3, disabled: this.isFormFieldDisabled()},
     role: {
       value: this.user()?.role || '',
       required: true,
@@ -35,7 +42,9 @@ export class EditUserComponent implements OnInit {
 
   constructor(private authStoreService: AuthStoreService,
               private userStoreService: UserStoreService,
-              private userService: UserService) {}
+              private userService: UserService,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.user.set(this.userStoreService.getUser());
@@ -50,12 +59,22 @@ export class EditUserComponent implements OnInit {
   }
 
   onSubmit(user: User): void {
-    if(this.authStoreService.getUser().id === this.userStoreService.getUser().id){
+    if (this.authStoreService.getUser().id === this.userStoreService.getUser().id) {
       user.id = this.userStoreService.getUser().id;
       this.authStoreService.setUser(user);
-      this.userService.updateUser(user).subscribe();
-    } else if(this.isAdmin() && this.authStoreService.getUser().id !== this.userStoreService.getUser().id) {
-      this.userService.updateUserRole(user.role, this.userStoreService.getUser().id).subscribe();
+      this.userService.updateUser(user).subscribe({
+        next: () => this.router.navigate(['/users']),
+        error: (err) => {
+          console.error('Error fetching users:', err);
+        }
+      });
+    } else if (this.isAdmin() && this.authStoreService.getUser().id !== this.userStoreService.getUser().id) {
+      this.userService.updateUserRole(user.role, this.userStoreService.getUser().id).subscribe({
+        next: () => this.router.navigate(['/users']),
+        error: (err) => {
+          console.error('Error fetching users:', err);
+        }
+      });
     }
   }
 }

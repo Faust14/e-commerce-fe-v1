@@ -1,29 +1,13 @@
-.vh-100 {
-  height: 100vh;
-}
-
-.co-content {
-  flex: 1 1 auto;
-  padding-top: 10px;
-  transition: all 0.3s ease;
-}
-
-.menu-open .co-content {
-  padding-inline-start: 260px;
-}
-
-.menu-closed .co-content {
-  padding-inline-start: 10px;
-}
 .main-wrapper {
   display: flex;
   flex-direction: row;
   position: absolute;
   left: 260px;
   top: 50px;
-  width: 100%;
+  width: 90%;
+  height: calc(100vh - 90px);
 }
 .main-wrapper > div {
-  flex-grow: 1; /* Ensures the content area expands */
+  flex-grow: 1;
   width: 100%;
 }

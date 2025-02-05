@@ -64,6 +64,18 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./user/edit-user/edit-user.component').then((m) => m.EditUserComponent),
       },
+      {
+        path: 'cart',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./cart/cart.component').then((m) => m.CartComponent),
+      },
+      {
+        path: 'order-table',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./order-table/order-table.component').then((m) => m.OrderTableComponent),
+      },
     ],
   },
 ];

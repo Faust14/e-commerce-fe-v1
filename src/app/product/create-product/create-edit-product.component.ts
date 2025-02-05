@@ -24,11 +24,11 @@ export class CreateEditProductComponent implements OnInit, OnDestroy {
     category: {
       value: this.productStoreService.getProduct()?.category.id ?? null,
       required: true,
-      options: this.categories(), // Array of objects [{ id: 1, name: 'Category 1' }]
+      options: this.categories(),
     }
   }));
 
-  categories:WritableSignal<Category[]> = signal<Category[]>([]);
+  categories: WritableSignal<Category[]> = signal<Category[]>([]);
 
   constructor(private productService: ProductService,
               private productStoreService: ProductStoreService,
@@ -39,12 +39,17 @@ export class CreateEditProductComponent implements OnInit, OnDestroy {
     this.getCategories();
   }
 
-  onSubmit(newProduct: Product) {
-    console.log(newProduct)
-    // if(this.productStoreService.getEditMode()) {
-    //   newProduct = this.createProductForEdit(newProduct);
-    // }
-    // this.productService.createProduct(newProduct).subscribe();
+  onSubmit(newProduct: any) {
+    if (this.productStoreService.getEditMode()) {
+      const category = this.categories().find(category => category.id === newProduct.category);
+      newProduct = this.createProductForEdit(newProduct);
+      if (category) {
+        newProduct.category = category;
+        this.createProduct(newProduct);
+      }
+      this.createProduct(newProduct);
+      return;
+    }
   }
 
   getCategories() {
@@ -62,7 +67,17 @@ export class CreateEditProductComponent implements OnInit, OnDestroy {
     }
   }
 
+  createProduct(product: Product) {
+    this.productService.createProduct(product).subscribe({
+      next: () => this.router.navigate(['/products']),
+      error: (err) => {
+        console.error('Error fetching users:', err);
+      }
+    });
+  }
+
   ngOnDestroy() {
     this.productStoreService.setProduct(null!);
+    this.productStoreService.setEditMode(false);
   }
 }

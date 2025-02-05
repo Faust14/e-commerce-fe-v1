@@ -12,14 +12,12 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('je l si ovde?')
     if (req.url.includes('api/login') || req.url.includes('api/register')) {
       return next.handle(req);
     }
     return this.authService.getToken().pipe(
       take(1),
       switchMap(token => {
-        console.log(token)
         let clonedReq = req;
         if (token) {
           clonedReq = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });

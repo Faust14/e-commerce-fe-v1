@@ -25,9 +25,9 @@ import {CommonModule, NgIf} from '@angular/common';
   `,
   styles: [`
     .search-bar {
-      width: 100%;
-      margin-bottom: 16px;
+      width: 25%;
       padding: 16px;
+      background-color: white;
     }
   `]
 })

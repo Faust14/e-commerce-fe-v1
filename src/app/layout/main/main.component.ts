@@ -7,7 +7,7 @@ import {RouterOutlet} from '@angular/router';
   selector: 'app-main',
   template: `
             <div class="main-wrapper">
-                <app-navbar [isNavbarClosed]="isNavbarClosed" (navbarToggled)="toggleNavbar($event)" />
+                <app-navbar />
               <div> <router-outlet></router-outlet></div>
             </div>
     `,
@@ -19,8 +19,4 @@ import {RouterOutlet} from '@angular/router';
 })
 
 export class MainComponent {
-  isNavbarClosed = false;
-  toggleNavbar($event: boolean) {
-    this.isNavbarClosed = $event;
-  }
 }
